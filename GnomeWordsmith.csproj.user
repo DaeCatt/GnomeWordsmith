@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files %28x86%29\Steam\steamapps\common\Terraria\Terraria.exe</StartProgram>
+    <StartArguments>"C:\Program Files %28x86%29\Steam\steamapps\common\terraria\tModLoaderServer.exe" -build "%24%28ProjectDir%29\" -eac "%24%28TargetPath%29"</StartArguments>
+    <StartWorkingDirectory>C:\Program Files %28x86%29\Steam\steamapps\common\Terraria\</StartWorkingDirectory>
+  </PropertyGroup>
+</Project>

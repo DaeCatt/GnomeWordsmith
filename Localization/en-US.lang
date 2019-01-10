@@ -1,0 +1,5 @@
+# Name of the NPC
+
+NPCName.Gnome_Wordsmith=Gnome Wordsmith
+
+# How to reference the name {$Mods.ForgeMaster.NPCName.Gnome_Wordsmith}

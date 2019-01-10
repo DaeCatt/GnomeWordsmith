@@ -1,0 +1,8 @@
+author = DaxterSpeed
+version = 0.99.2
+displayName = Gnome Wordsmith (Beta)
+hideCode = false
+hideResources = false
+includeSource = true
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
+includePDB = false
