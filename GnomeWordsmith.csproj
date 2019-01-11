@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Localization\en-US.lang" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

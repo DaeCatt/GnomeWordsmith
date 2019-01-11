@@ -1,7 +1,18 @@
-# Name of the NPC
+# How to reference the name {$Mods.ForgeMaster.NPCName.GnomeWordsmith}
 
+# Gnome Wordsmith NPC
 NPCName.GnomeWordsmith=Gnome Wordsmith
 
-# How to reference the name {$Mods.ForgeMaster.NPCName.Gnome_Wordsmith}
+NPCChat.GnomeWordsmith.Rand0=I ain't much for talking. What do you want?
+NPCChat.GnomeWordsmith.Rand1=...
+NPCChat.GnomeWordsmith.Rand2=Things used to be quieter around here.
+NPCChat.GnomeWordsmith.GoblinTinkerer=Don't let {0} touch your gear. They're just scratching the surface.
+NPCChat.GnomeWordsmith.Steampunker={0}'s work is impressive... For a youngling.
+NPCChat.GnomeWordsmith.BloodMoon=The blood moon has put everyone on edge. Stay on your toes.
 
+# UI Text
 ReforgeUI.ShopLabel=Smithable Prefixes
+
+# Portable Wormhole
+ItemName.PortableWormhole=Portable Wormhole
+ItemTooltip.PortableWormhole=Teleports you to a party member or Town NPC\nClick their head on the fullscreen map

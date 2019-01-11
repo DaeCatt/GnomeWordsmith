@@ -82,12 +82,26 @@ namespace GnomeWordsmith.NPCs {
 
 			return name.Get();
 		}
-
-		// TODO: Add localization support
+		
 		public override string GetChat() {
 			WeightedRandom<string> chat = new WeightedRandom<string>();
+			
+			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand0"));
+			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand1"));
+			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand2"));
+			int goblinkTinkerer = NPC.FindFirstNPC(NPCID.GoblinTinkerer);
+			if (goblinkTinkerer >= 0) {
+				chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.GoblinTinkerer", Main.npc[goblinkTinkerer].GivenName));
+			}
+			
+			int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
+			if (steampunker >= 0) {
+				chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Steampunker", Main.npc[steampunker].GivenName));
+			}
 
-			chat.Add("Forging's an ancient and precise craft. Goblins are just scratching the surface.");
+			if (Main.bloodMoon) {
+				chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.BloodMoon"));
+			}
 
 			return chat.Get();
 		}

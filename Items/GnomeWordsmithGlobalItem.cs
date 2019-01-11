@@ -1,5 +1,6 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
+using Terraria.Localization;
 
 namespace GnomeWordsmith.Items {
 	class GnomeWordsmithGlobalItem : GlobalItem {
@@ -92,7 +93,8 @@ namespace GnomeWordsmith.Items {
 					cursorOnMapY <= (double) maxY) {
 					Main.mouseLeftRelease = false;
 					Main.mapFullscreen = false;
-					Main.NewText(string.Format("{0} teleported to {1}", Main.player[Main.myPlayer].name, Main.npc[i].FullName), 255, 255, 0);
+					
+					Main.NewText(Language.GetTextValue("Game.HasTeleportedTo", Main.player[Main.myPlayer].name, Main.npc[i].FullName), 255, 255, 0);
 					Main.player[Main.myPlayer].Teleport(Main.npc[i].position);
 
 					return;
