@@ -11,7 +11,6 @@ using Terraria.Localization;
 
 namespace GnomeWordsmith.UI {
 	class ReforgeUI : UIState {
-		public static NPC ownerNPC;
 		public static bool visible = false;
 
 		public static Item lastItem = null;
@@ -100,37 +99,17 @@ namespace GnomeWordsmith.UI {
 		}
 
 		public override void Draw(SpriteBatch spriteBatch) {
-			// Check close conditions
-			// TODO: Close if player opens a chest.
-			// TODO: Verify other vanilla interface closing actions.
-
-			// Make sure the inventory is still open
-			if (!Main.playerInventory) {
-				visible = false;
-			}
-
+			base.Draw(spriteBatch);
 			GnomeWordsmithPlayer gnomeWordsmithPlayer = Main.LocalPlayer.GetModPlayer<GnomeWordsmithPlayer>(GnomeWordsmith.instance);
-			Item[] slot = new Item[1];
-			slot[0] = gnomeWordsmithPlayer.ReforgeItem;
-
-			// Close if the "ownerNPC" is dead, or if we get too far away.
-			if (ownerNPC != null) {
-				if (Vector2.Distance(Main.LocalPlayer.position, ownerNPC.position) > 12f * 16f) {
-					visible = false;
-				}
-			} else {
+			
+			// Make sure the inventory is still open
+			if (!Main.playerInventory || Main.player[Main.myPlayer].chest != -1 || Main.npcShop != 0 || Main.player[Main.myPlayer].talkNPC == -1) {
 				visible = false;
-			}
-
-			// Handle closing self
-			if (!visible) {
-				// Disassociate with opener NPC
-				ownerNPC = null;
 
 				// Drop item if closed
-				if (!slot[0].IsAir) {
-					Main.LocalPlayer.QuickSpawnClonedItem(slot[0], slot[0].stack);
-					slot[0].TurnToAir();
+				if (!gnomeWordsmithPlayer.ReforgeItem.IsAir) {
+					Main.LocalPlayer.QuickSpawnClonedItem(gnomeWordsmithPlayer.ReforgeItem, gnomeWordsmithPlayer.ReforgeItem.stack);
+					gnomeWordsmithPlayer.ReforgeItem.TurnToAir();
 				}
 
 				// Make sure our player instance knows we don't have an item
@@ -140,14 +119,16 @@ namespace GnomeWordsmith.UI {
 				UpdateCurrentPrefixesForItem(null);
 
 				// Restore crafting interface fully.
-				if (MaxRecipesCache > 0) {
+				if (MaxRecipesCache > Recipe.maxRecipes) {
 					Recipe.maxRecipes = MaxRecipesCache;
-					Recipe.FindRecipes();
 				}
-
-				base.Draw(spriteBatch);
+				
+				Recipe.FindRecipes();
 				return;
 			}
+			
+			Item[] slot = new Item[1];
+			slot[0] = gnomeWordsmithPlayer.ReforgeItem;
 
 			// HACK: Hide crafting interface
 			if (Recipe.maxRecipes > 0) {
@@ -157,9 +138,6 @@ namespace GnomeWordsmith.UI {
 			if (Main.numAvailableRecipes > 0) {
 				Main.numAvailableRecipes = 0;
 			}
-
-			// TODO: Remove? We don't use any vanilla drawing
-			base.Draw(spriteBatch);
 
 			/**
 			 * Create a point for where the mouse is. Used to check whether the

@@ -105,12 +105,9 @@ namespace GnomeWordsmith.NPCs {
 				// TODO: Turn interface opening into a method?
 
 				// Close chat window
-				Main.npcChatText = "";
-				// Open player inventory
 				Main.playerInventory = true;
-				// Set self to "owner" of UI
-				ReforgeUI.ownerNPC = npc;
-				// Open UI
+				Main.npcChatText = "";
+				Main.PlaySound(12, -1, -1, 1, 1f, 0f);
 				ReforgeUI.visible = true;
 			}
 		}
