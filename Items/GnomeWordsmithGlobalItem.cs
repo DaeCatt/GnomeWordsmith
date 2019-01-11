@@ -55,12 +55,11 @@ namespace GnomeWordsmith.Items {
 					if (i == Main.myPlayer || !Main.player[i].active || Main.player[i].dead || Main.player[Main.myPlayer].team != Main.player[i].team || Main.player[i].hostile) {
 						continue;
 					}
-
-					// TODO: use player head dimensions instead of 16x16 rect.
-					float minX = Main.player[i].position.X - 8f * mapScale;
-					float minY = Main.player[i].position.Y - 8f * mapScale;
-					float maxX = Main.player[i].position.X + 8f * mapScale;
-					float maxY = Main.player[i].position.Y + 8f * mapScale;
+					
+					float minX = Main.player[i].position.X - 14f * mapScale;
+					float minY = Main.player[i].position.Y - 14f * mapScale;
+					float maxX = Main.player[i].position.X + 14f * mapScale;
+					float maxY = Main.player[i].position.Y + 14f * mapScale;
 
 					if (cursorOnMapX >= (double) minX &&
 						cursorOnMapX <= (double) maxX &&
@@ -77,15 +76,22 @@ namespace GnomeWordsmith.Items {
 
 			for (int i = 0; i < Main.npc.Length; i++) {
 				// Only check NPCs that are set to townNPC.
-				if (!Main.npc[i].townNPC) {
+				if (!Main.npc[i].active || !Main.npc[i].townNPC) {
 					continue;
 				}
 
-				// TODO: use NPC head dimensions instead of 16x16 rect.
-				float minX = Main.npc[i].position.X - 8f * mapScale;
-				float minY = Main.npc[i].position.Y - 8f * mapScale;
-				float maxX = Main.npc[i].position.X + 8f * mapScale;
-				float maxY = Main.npc[i].position.Y + 8f * mapScale;
+				int headIndex = NPC.TypeToHeadIndex(Main.npc[i].type);
+				if (headIndex <= 0) {
+					continue;
+				}
+				
+				float halfWidth = Main.npcHeadTexture[headIndex].Width / 2;
+				float halfHeight = Main.npcHeadTexture[headIndex].Height / 2;
+				
+				float minX = Main.npc[i].position.X - halfWidth * mapScale;
+				float minY = Main.npc[i].position.Y - halfHeight * mapScale;
+				float maxX = Main.npc[i].position.X + halfWidth * mapScale;
+				float maxY = Main.npc[i].position.Y + halfHeight * mapScale;
 
 				if (cursorOnMapX >= (double) minX &&
 					cursorOnMapX <= (double) maxX &&

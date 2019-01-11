@@ -15,8 +15,6 @@ The Gnome Wordsmith can only spawn once both the Goblin Tinkerer and the Steampu
 - No scaling support. Certain (small) resolutions might suffer from having the interface go off-screen. This should only be an issue for accessories, which have the most possible prefixes.
 - No support for mod prefixes. Introducing support should be pretty easy, but ties into the above issue of parts of the interface potentially appearing off-screen.
 - The Gnome Wordsmith will not attack enemies. This is partially because it's a "short" NPCs, so some attack animations appear odd.
-- Portable Wormhole doesn't take NPC / Player head size into account.
-- Portable Wormhole teleportation happens immediately. A delay might be introduced.
 
 ### tModLoader changes required:
 
