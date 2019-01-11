@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.UI;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
+using Terraria.Localization;
 
 namespace GnomeWordsmith.UI {
 	class ReforgeUI : UIState {
@@ -289,19 +290,19 @@ namespace GnomeWordsmith.UI {
 
 			string tagString = "";
 			if (platinum > 0) {
-				tagString = tagString + "[c/" + Colors.AlphaDarken(Colors.CoinPlatinum).Hex3() + ":" + platinum + " " + Lang.inter[15].Value + "] ";
+				tagString = tagString + "[c/" + Colors.AlphaDarken(Colors.CoinPlatinum).Hex3() + ":" + platinum + " " + Language.GetTextValue("LegacyInterface.15") + "] ";
 			}
 
 			if (gold > 0) {
-				tagString = tagString + "[c/" + Colors.AlphaDarken(Colors.CoinGold).Hex3() + ":" + gold + " " + Lang.inter[16].Value + "] ";
+				tagString = tagString + "[c/" + Colors.AlphaDarken(Colors.CoinGold).Hex3() + ":" + gold + " " + Language.GetTextValue("LegacyInterface.16") + "] ";
 			}
 
 			if (silver > 0) {
-				tagString = tagString + "[c/" + Colors.AlphaDarken(Colors.CoinSilver).Hex3() + ":" + silver + " " + Lang.inter[17].Value + "] ";
+				tagString = tagString + "[c/" + Colors.AlphaDarken(Colors.CoinSilver).Hex3() + ":" + silver + " " + Language.GetTextValue("LegacyInterface.17") + "] ";
 			}
 
 			if (copper > 0) {
-				tagString = tagString + "[c/" + Colors.AlphaDarken(Colors.CoinCopper).Hex3() + ":" + copper + " " + Lang.inter[18].Value + "] ";
+				tagString = tagString + "[c/" + Colors.AlphaDarken(Colors.CoinCopper).Hex3() + ":" + copper + " " + Language.GetTextValue("LegacyInterface.18") + "] ";
 			}
 
 			return tagString;
