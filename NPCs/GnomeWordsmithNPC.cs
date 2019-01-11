@@ -128,8 +128,8 @@ namespace GnomeWordsmith.NPCs {
 
 		// TODO: Add more "gnome-themed" items to shop.
 		public override void SetupShop(Chest shop, ref int nextSlot) {
-			shop.item[nextSlot].SetDefaults(mod.ItemType("PortableWormhole"));
-			nextSlot++;
+			shop.item[nextSlot++].SetDefaults(ItemID.FallenStar);
+			shop.item[nextSlot++].SetDefaults(mod.ItemType("PortableWormhole"));
 		}
 
 		/**
