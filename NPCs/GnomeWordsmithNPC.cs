@@ -95,7 +95,7 @@ namespace GnomeWordsmith.NPCs {
 		// TODO: Steal "Reforge" text from Vanilla interface text.
 		public override void SetChatButtons(ref string button, ref string button2) {
 			button = Language.GetTextValue("LegacyInterface.28");
-			button2 = Language.GetTextValue("LegacyInterface.19";
+			button2 = Language.GetTextValue("LegacyInterface.19");
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop) {
