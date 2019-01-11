@@ -1,13 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
-using Terraria.UI;
-using Terraria.ModLoader;
-using Terraria.UI.Chat;
 using Terraria.Localization;
+using Terraria.UI;
+using Terraria.UI.Chat;
 
 namespace GnomeWordsmith.UI {
 	class ReforgeUI : UIState {
@@ -41,7 +38,7 @@ namespace GnomeWordsmith.UI {
 			Item clone = new Item();
 			clone.netDefaults(item.netID);
 			clone = clone.CloneWithModdedDataFrom(item);
-			clone.Prefix((int) prefix);
+			clone.Prefix(prefix);
 
 			purchasableItems[purchasableItemsLength] = clone;
 			purchasableItemsLength++;
@@ -101,7 +98,7 @@ namespace GnomeWordsmith.UI {
 		public override void Draw(SpriteBatch spriteBatch) {
 			base.Draw(spriteBatch);
 			GnomeWordsmithPlayer gnomeWordsmithPlayer = Main.LocalPlayer.GetModPlayer<GnomeWordsmithPlayer>(GnomeWordsmith.instance);
-			
+
 			// Make sure the inventory is still open
 			if (!Main.playerInventory || Main.player[Main.myPlayer].chest != -1 || Main.npcShop != 0 || Main.player[Main.myPlayer].talkNPC == -1) {
 				visible = false;
@@ -122,11 +119,11 @@ namespace GnomeWordsmith.UI {
 				if (MaxRecipesCache > Recipe.maxRecipes) {
 					Recipe.maxRecipes = MaxRecipesCache;
 				}
-				
+
 				Recipe.FindRecipes();
 				return;
 			}
-			
+
 			Item[] slot = new Item[1];
 			slot[0] = gnomeWordsmithPlayer.ReforgeItem;
 
@@ -166,7 +163,7 @@ namespace GnomeWordsmith.UI {
 					 * This re-implements part of ItemSlot.LeftClick
 					 */
 					if (Main.mouseItem.type == 0 || Main.mouseItem.Prefix(-3)) {
-						Utils.Swap<Item>(ref slot[0], ref Main.mouseItem);
+						Utils.Swap(ref slot[0], ref Main.mouseItem);
 						if (slot[0].type == 0 || slot[0].stack < 1) {
 							slot[0] = new Item();
 						}
@@ -198,10 +195,10 @@ namespace GnomeWordsmith.UI {
 			if (purchasableItemsLength == 0) {
 				return;
 			}
-
-			// TODO: Add localization
+			
 			xPosition += slotWidth + 8;
-			ChatManager.DrawColorCodedStringWithShadow(Main.spriteBatch, Main.fontMouseText, "Smithable Prefixes:", new Vector2(xPosition, yPosition), Color.White, 0f, Vector2.Zero, Vector2.One, -1f, 2f);
+			string labelText = Language.GetTextValue("Mods.GnomeWordsmith.ReforgeUI.ShopLabel");
+			ChatManager.DrawColorCodedStringWithShadow(Main.spriteBatch, Main.fontMouseText, labelText, new Vector2(xPosition, yPosition), Color.White, 0f, Vector2.Zero, Vector2.One, -1f, 2f);
 			yPosition -= slotHeight / 2;
 
 			// List all purchasable prefixes.
@@ -235,7 +232,6 @@ namespace GnomeWordsmith.UI {
 						 * Place purchased item in the reforge slot, but Hide
 						 * all purchasable prefixes.
 						 */
-						item.newAndShiny = true;
 						gnomeWordsmithPlayer.ReforgeItem = item;
 						UpdateCurrentPrefixesForItem(null);
 						return;

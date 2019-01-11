@@ -3,3 +3,5 @@
 NPCName.GnomeWordsmith=Gnome Wordsmith
 
 # How to reference the name {$Mods.ForgeMaster.NPCName.Gnome_Wordsmith}
+
+ReforgeUI.ShopLabel=Smithable Prefixes
