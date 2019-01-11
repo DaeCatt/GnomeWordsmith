@@ -21,7 +21,7 @@ namespace GnomeWordsmith.NPCs {
 		}
 
 		public override bool Autoload(ref string name) {
-			name = "Gnome Wordsmith";
+			name = "GnomeWordsmith";
 			return mod.Properties.Autoload;
 		}
 
