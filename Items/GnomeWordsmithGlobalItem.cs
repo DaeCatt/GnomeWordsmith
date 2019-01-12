@@ -1,26 +1,23 @@
-﻿using Terraria;
-using Terraria.ModLoader;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace GnomeWordsmith.Items {
 	class GnomeWordsmithGlobalItem : GlobalItem {
-		public GnomeWordsmithGlobalItem() {
-		}
-
+		public GnomeWordsmithGlobalItem() { }
+		
 		/**
 		 * Handle Portable Wormhole teleportations. This could be done on the
 		 * Portable Wormhole item directly, but we might want to introduce
 		 * other items that can teleport (eg Cellphone upgrade).
 		 */
 		public override void UpdateInventory(Item item, Player player) {
-			if (
-				!Main.mapFullscreen ||
-				!Main.mouseLeft ||
-				!Main.mouseLeftRelease ||
-				!Main.player[Main.myPlayer].HasItem(mod.ItemType("PortableWormhole"))
-			) {
+			if (!Main.mapFullscreen && item.type != mod.ItemType("PortableWormhole"))
 				return;
-			}
+
+			if (!Main.mouseLeft || !Main.mouseLeftRelease)
+				return;
 
 			// Translate fullscreen map position into world coordinates
 			float mapScale = 16f / Main.mapFullscreenScale;
@@ -55,7 +52,7 @@ namespace GnomeWordsmith.Items {
 					if (i == Main.myPlayer || !Main.player[i].active || Main.player[i].dead || Main.player[Main.myPlayer].team != Main.player[i].team || Main.player[i].hostile) {
 						continue;
 					}
-					
+
 					float minX = Main.player[i].position.X - 14f * mapScale;
 					float minY = Main.player[i].position.Y - 14f * mapScale;
 					float maxX = Main.player[i].position.X + 14f * mapScale;
@@ -68,6 +65,7 @@ namespace GnomeWordsmith.Items {
 						Main.mouseLeftRelease = false;
 						Main.mapFullscreen = false;
 						Main.player[Main.myPlayer].UnityTeleport(Main.player[i].position);
+						// hoverTarget = Main.player[i].name;
 
 						return;
 					}
@@ -84,10 +82,10 @@ namespace GnomeWordsmith.Items {
 				if (headIndex <= 0) {
 					continue;
 				}
-				
+
 				float halfWidth = Main.npcHeadTexture[headIndex].Width / 2;
 				float halfHeight = Main.npcHeadTexture[headIndex].Height / 2;
-				
+
 				float minX = Main.npc[i].position.X - halfWidth * mapScale;
 				float minY = Main.npc[i].position.Y - halfHeight * mapScale;
 				float maxX = Main.npc[i].position.X + halfWidth * mapScale;
@@ -99,9 +97,10 @@ namespace GnomeWordsmith.Items {
 					cursorOnMapY <= (double) maxY) {
 					Main.mouseLeftRelease = false;
 					Main.mapFullscreen = false;
-					
+
 					Main.NewText(Language.GetTextValue("Game.HasTeleportedTo", Main.player[Main.myPlayer].name, Main.npc[i].FullName), 255, 255, 0);
 					Main.player[Main.myPlayer].Teleport(Main.npc[i].position);
+					// hoverTarget = Main.npc[i].FullName;
 
 					return;
 				}
