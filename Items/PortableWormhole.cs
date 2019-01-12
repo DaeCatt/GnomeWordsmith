@@ -1,13 +1,9 @@
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.Localization;
 
 namespace GnomeWordsmith.Items {
 	public class PortableWormhole : ModItem {
-		public override void SetStaticDefaults() {
-			DisplayName.SetDefault(Language.GetTextValue("Mods.GnomeWordsmith.ItemName.PortableWormhole"));
-			Tooltip.SetDefault(Language.GetTextValue("Mods.GnomeWordsmith.ItemTooltip.PortableWormhole"));
-		}
+		public override void SetStaticDefaults() { }
 
 		// Teleport effect is handled in GnomeWordsmithGlobalItem.cs
 		public override void SetDefaults() {
