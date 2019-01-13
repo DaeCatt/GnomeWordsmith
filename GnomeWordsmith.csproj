@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="build.txt" />
     <Content Include="description.txt" />
+    <Content Include="icon.png" />
     <Content Include="Items\PortableWormhole.png" />
     <Content Include="NPCs\GnomeWordsmithNPC_Party.png" />
     <Content Include="NPCs\GnomeWordsmithNPC.png" />
