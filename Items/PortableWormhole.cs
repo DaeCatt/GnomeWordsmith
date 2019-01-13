@@ -5,7 +5,7 @@ namespace GnomeWordsmith.Items {
 	public class PortableWormhole : ModItem {
 		public override void SetStaticDefaults() { }
 
-		// Teleport effect is handled in GnomeWordsmithGlobalItem.cs
+		// Teleport effect is handled in GnomeWordsmith.cs
 		public override void SetDefaults() {
 			item.CloneDefaults(2997);
 			item.maxStack = 1;

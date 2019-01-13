@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="GnomeWordsmith.cs" />
     <Compile Include="GnomeWordsmithPlayer.cs" />
-    <Compile Include="Items\GnomeWordsmithGlobalItem.cs" />
     <Compile Include="Items\PortableWormhole.cs" />
     <Compile Include="NPCs\GnomeWordsmithNPC.cs" />
     <Compile Include="UI\ReforgeUI.cs" />
