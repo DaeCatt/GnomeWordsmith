@@ -30,9 +30,9 @@ namespace GnomeWordsmith.NPCs {
 			Main.npcFrameCount[npc.type] = 26;
 			NPCID.Sets.AttackFrameCount[npc.type] = 5;
 			NPCID.Sets.DangerDetectRange[npc.type] = 700;
-			NPCID.Sets.AttackType[npc.type] = -1; // No attack
-			NPCID.Sets.AttackTime[npc.type] = 30;
-			NPCID.Sets.AttackAverageChance[npc.type] = 30;
+			NPCID.Sets.AttackType[npc.type] = 0;
+			NPCID.Sets.AttackTime[npc.type] = 15;
+			NPCID.Sets.AttackAverageChance[npc.type] = 45;
 			NPCID.Sets.HatOffsetY[npc.type] = 8;
 		}
 
@@ -82,10 +82,10 @@ namespace GnomeWordsmith.NPCs {
 
 			return name.Get();
 		}
-		
+
 		public override string GetChat() {
 			WeightedRandom<string> chat = new WeightedRandom<string>();
-			
+
 			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand0"));
 			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand1"));
 			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand2"));
@@ -93,7 +93,7 @@ namespace GnomeWordsmith.NPCs {
 			if (goblinkTinkerer >= 0) {
 				chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.GoblinTinkerer", Main.npc[goblinkTinkerer].GivenName));
 			}
-			
+
 			int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
 			if (steampunker >= 0) {
 				chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Steampunker", Main.npc[steampunker].GivenName));
@@ -121,7 +121,7 @@ namespace GnomeWordsmith.NPCs {
 				// Close chat window
 				Main.playerInventory = true;
 				Main.npcChatText = "";
-				Main.PlaySound(12, -1, -1, 1, 1f, 0f);
+				Main.PlaySound(SoundID.MenuTick);
 				ReforgeUI.visible = true;
 			}
 		}
@@ -132,59 +132,24 @@ namespace GnomeWordsmith.NPCs {
 			shop.item[nextSlot++].SetDefaults(mod.ItemType("PortableWormhole"));
 		}
 
-		/**
-		 * From https://github.com/hamstar0/tml-rewards-mod/blob/master/NPCs/WayfarerTownNPC.cs
-		 */
-
-		/*
-		private bool IsFiring = false;
-
-		public override void AI() {
-			if( npc.ai[0] == 12 ) {
-				if( !IsFiring ) {
-					IsFiring = true;
-					Main.PlaySound( SoundID.Item11, npc.position );
-				}
-			} else {
-				if( IsFiring ) {
-					IsFiring = false;
-				}
-			}
+		public override void TownNPCAttackStrength(ref int damage, ref float knockback) {
+			damage = 60;
+			knockback = 4f;
 		}
 
-		public override void DrawTownAttackGun( ref float scale, ref int item, ref int closeness ) {
-			item = ItemID.Boomstick;
-			scale = 0.75f;
-
-			if( npc.ai[2] < -0.1f ) {
-				closeness = 28;
-			}
+		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown) {
+			cooldown = 5;
+			randExtraCooldown = 2;
 		}
 
-		public override void TownNPCAttackStrength( ref int damage, ref float knockback ) {
-			if( Main.hardMode ) {
-				damage = 50;
-				knockback = 4f;
-			} else {
-				damage = 20;
-				knockback = 4f;
-			}
-		}
-
-		public override void TownNPCAttackCooldown( ref int cooldown, ref int randExtraCooldown ) {
-			cooldown = 10;
-			randExtraCooldown = 5;
-		}
-
-		public override void TownNPCAttackProj( ref int projType, ref int attackDelay ) {
-			projType = ProjectileID.Bullet;
+		public override void TownNPCAttackProj(ref int projType, ref int attackDelay) {
+			projType = ProjectileID.StarWrath;
 			attackDelay = 1;
 		}
 
-		public override void TownNPCAttackProjSpeed( ref float multiplier, ref float gravityCorrection, ref float randomOffset ) {
-			multiplier = 20f;
-			randomOffset = 0f;
+		public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset) {
+			multiplier = 8f;
+			randomOffset = 1f;
 		}
-		*/
 	}
 }

@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.ID;
 
 namespace GnomeWordsmith {
 	class GnomeWordsmith : Mod {
@@ -92,7 +93,7 @@ namespace GnomeWordsmith {
 						// Main.DrawPlayerHead(Main.player[i], playerHeadCenterX, playerHeadCenterY, 2f, Main.UIScale + 0.5f);
 
 						if (!unityMouseOver) {
-							Main.PlaySound(12, -1, -1, 1, 1f, 0f);
+							Main.PlaySound(SoundID.MenuTick);
 						}
 
 						foundTarget = true;
@@ -142,7 +143,7 @@ namespace GnomeWordsmith {
 						Main.spriteBatch.Draw(headTexture, new Vector2(npcHeadCenterX, npcHeadCenterY), new Rectangle(0, 0, headTexture.Width, headTexture.Height), Color.White, 0f, new Vector2(headTexture.Width / 2, headTexture.Height / 2), Main.UIScale + 0.5f, effect, 0f);
 
 						if (!unityMouseOver) {
-							Main.PlaySound(12, -1, -1, 1, 1f, 0f);
+							Main.PlaySound(SoundID.MenuTick);
 						}
 
 						foundTarget = true;

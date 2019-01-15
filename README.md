@@ -14,7 +14,6 @@ The Gnome Wordsmith can only spawn once both the Goblin Tinkerer and the Steampu
 - No Gamepad support. This interface requires you to use a mouse to navigate.
 - No scaling support. Certain (small) resolutions might suffer from having the interface go off-screen. This should only be an issue for accessories, which have the most possible prefixes.
 - No support for mod prefixes. Introducing support should be pretty easy, but ties into the above issue of parts of the interface potentially appearing off-screen.
-- The Gnome Wordsmith will not attack enemies. This is partially because it's a "short" NPCs, so some attack animations appear odd.
 
 ### tModLoader changes required:
 

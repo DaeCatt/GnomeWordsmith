@@ -173,7 +173,7 @@ namespace GnomeWordsmith.UI {
 						}
 
 						if (Main.mouseItem.type > 0 || slot[0].type > 0) {
-							Main.PlaySound(7, -1, -1, 1, 1f, 0f);
+							Main.PlaySound(SoundID.Grab);
 						}
 					}
 
@@ -224,9 +224,9 @@ namespace GnomeWordsmith.UI {
 
 						Main.player[Main.myPlayer].BuyItem(buyCost, -1);
 
-						// Show text and play sounds
+						// Show text and play forge sound
 						ItemText.NewText(item, item.stack, true, false);
-						Main.PlaySound(SoundID.Item37, -1, -1);
+						Main.PlaySound(SoundID.Item37);
 
 						/**
 						 * Place purchased item in the reforge slot, but Hide
