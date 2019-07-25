@@ -1,0 +1,18 @@
+# How to reference the name {$Mods.ForgeMaster.NPCName.GnomeWordsmith}
+
+# Gnome Wordsmith NPC
+NPCName.GnomeWordsmith=矮人大师
+
+NPCChat.GnomeWordsmith.Rand0=没什么好聊的.你想要什么?
+NPCChat.GnomeWordsmith.Rand1=...
+NPCChat.GnomeWordsmith.Rand2=这里以前比较安静.
+NPCChat.GnomeWordsmith.GoblinTinkerer=别让{0}碰你的装备.他的工艺只是皮毛罢了.
+NPCChat.GnomeWordsmith.Steampunker={0}的工作真令人印象深刻...对于年轻人来说.
+NPCChat.GnomeWordsmith.BloodMoon=血月让每个人都紧张不安.要保持警惕.
+
+# UI Text
+ReforgeUI.ShopLabel=可定制重铸
+
+# Portable Wormhole
+ItemName.PortableWormhole=便携式虫洞
+ItemTooltip.PortableWormhole=传送到一个队友或城镇NPC\n在全屏地图上点击他们的头部
