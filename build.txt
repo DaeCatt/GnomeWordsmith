@@ -1,5 +1,5 @@
 author = DaxterSpeed
-version = 0.99.6
+version = 0.99.7
 displayName = Gnome Wordsmith (Beta)
 homepage = https://github.com/DaxterSpeed/GnomeWordsmith
 hideCode = false
