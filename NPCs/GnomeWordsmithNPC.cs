@@ -5,28 +5,36 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
-namespace GnomeWordsmith.NPCs {
+namespace GnomeWordsmith.NPCs
+{
 	[AutoloadHead]
-	public class GnomeWordsmithNPC : ModNPC {
-		public override string Texture {
-			get {
+	public class GnomeWordsmithNPC : ModNPC
+	{
+		public override string Texture
+		{
+			get
+			{
 				return "GnomeWordsmith/NPCs/GnomeWordsmithNPC";
 			}
 		}
 
-		public override string[] AltTextures {
-			get {
+		public override string[] AltTextures
+		{
+			get
+			{
 				return new string[] { "GnomeWordsmith/NPCs/GnomeWordsmithNPC_Party" };
 			}
 		}
 
-		public override bool Autoload(ref string name) {
+		public override bool Autoload(ref string name)
+		{
 			name = "GnomeWordsmith";
 			return mod.Properties.Autoload;
 		}
 
 		// TODO: Investigate adding an attack
-		public override void SetStaticDefaults() {
+		public override void SetStaticDefaults()
+		{
 			Main.npcFrameCount[npc.type] = 26;
 			NPCID.Sets.AttackFrameCount[npc.type] = 5;
 			NPCID.Sets.DangerDetectRange[npc.type] = 700;
@@ -36,7 +44,8 @@ namespace GnomeWordsmith.NPCs {
 			NPCID.Sets.HatOffsetY[npc.type] = 8;
 		}
 
-		public override void SetDefaults() {
+		public override void SetDefaults()
+		{
 			npc.townNPC = true;
 			npc.friendly = true;
 			npc.width = 18;
@@ -53,22 +62,26 @@ namespace GnomeWordsmith.NPCs {
 		}
 
 		// TODO: Investigate other hit effects
-		public override void HitEffect(int hitDirection, double damage) {
+		public override void HitEffect(int hitDirection, double damage)
+		{
 			int num = npc.life > 0 ? 1 : 5;
-			for (int k = 0; k < num; k++) {
+			for (int k = 0; k < num; k++)
+			{
 				Dust.NewDust(npc.position, npc.width, npc.height, mod.DustType("Sparkle"));
 			}
 		}
 
 		// Only spawn if both the Goblin and the Steampunker are in your world.
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money) {
+		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		{
 			int goblinkTinkerer = NPC.FindFirstNPC(NPCID.GoblinTinkerer);
 			int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
 			return goblinkTinkerer >= 0 && steampunker >= 0;
 		}
 
 		// TODO: Add localization support
-		public override string TownNPCName() {
+		public override string TownNPCName()
+		{
 			WeightedRandom<string> name = new WeightedRandom<string>();
 
 			name.Add("Arne");
@@ -83,23 +96,27 @@ namespace GnomeWordsmith.NPCs {
 			return name.Get();
 		}
 
-		public override string GetChat() {
+		public override string GetChat()
+		{
 			WeightedRandom<string> chat = new WeightedRandom<string>();
 
 			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand0"));
 			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand1"));
 			chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Rand2"));
 			int goblinkTinkerer = NPC.FindFirstNPC(NPCID.GoblinTinkerer);
-			if (goblinkTinkerer >= 0) {
+			if (goblinkTinkerer >= 0)
+			{
 				chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.GoblinTinkerer", Main.npc[goblinkTinkerer].GivenName));
 			}
 
 			int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
-			if (steampunker >= 0) {
+			if (steampunker >= 0)
+			{
 				chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.Steampunker", Main.npc[steampunker].GivenName));
 			}
 
-			if (Main.bloodMoon) {
+			if (Main.bloodMoon)
+			{
 				chat.Add(Language.GetTextValue("Mods.GnomeWordsmith.NPCChat.GnomeWordsmith.BloodMoon"));
 			}
 
@@ -107,15 +124,20 @@ namespace GnomeWordsmith.NPCs {
 		}
 
 		// TODO: Steal "Reforge" text from Vanilla interface text.
-		public override void SetChatButtons(ref string button, ref string button2) {
+		public override void SetChatButtons(ref string button, ref string button2)
+		{
 			button = Language.GetTextValue("LegacyInterface.28");
 			button2 = Language.GetTextValue("LegacyInterface.19");
 		}
 
-		public override void OnChatButtonClicked(bool firstButton, ref bool shop) {
-			if (firstButton) {
+		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
+		{
+			if (firstButton)
+			{
 				shop = true;
-			} else {
+			}
+			else
+			{
 				// TODO: Turn interface opening into a method?
 
 				// Close chat window
@@ -127,27 +149,32 @@ namespace GnomeWordsmith.NPCs {
 		}
 
 		// TODO: Add more "gnome-themed" items to shop.
-		public override void SetupShop(Chest shop, ref int nextSlot) {
+		public override void SetupShop(Chest shop, ref int nextSlot)
+		{
 			shop.item[nextSlot++].SetDefaults(ItemID.FallenStar);
 			shop.item[nextSlot++].SetDefaults(mod.ItemType("PortableWormhole"));
 		}
 
-		public override void TownNPCAttackStrength(ref int damage, ref float knockback) {
+		public override void TownNPCAttackStrength(ref int damage, ref float knockback)
+		{
 			damage = 60;
 			knockback = 4f;
 		}
 
-		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown) {
+		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
+		{
 			cooldown = 5;
 			randExtraCooldown = 2;
 		}
 
-		public override void TownNPCAttackProj(ref int projType, ref int attackDelay) {
+		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
+		{
 			projType = ProjectileID.StarWrath;
 			attackDelay = 1;
 		}
 
-		public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset) {
+		public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
+		{
 			multiplier = 8f;
 			randomOffset = 1f;
 		}

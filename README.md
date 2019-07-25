@@ -9,19 +9,14 @@ The Gnome Wordsmith can only spawn once both the Goblin Tinkerer and the Steampu
 
 ## Known Issues
 
+-   Sometimes it's possible to reforge an item to have no prefix.
+
 ### Should be fixed for 1.0 release
 
 -   No Gamepad support. This interface requires you to use a mouse to navigate.
 -   No scaling support. Certain (small) resolutions might suffer from having the interface go off-screen. This should only be an issue for accessories, which have the most possible prefixes.
 -   No support for mod prefixes. Introducing support should be pretty easy, but ties into the above issue of parts of the interface potentially appearing off-screen.
--   Sometimes it's possible to reforge an item to have no prefix.
--   Reforge interface currently hides the current prefix, rather than showing that it's a currently disabled options (since the item already has that prefix).
--   Mod does not unload cleanly.
-
-### tModLoader changes required:
-
--   ~~While using the gnome reforge interface the inventory crafting interface will occasionally flash in for 1 frame. Fixing this would require introducing a new variable in tModLoader to allow hiding the inventory crafting interface. As of right now the game only hides the inventory crafting interface is the Goblin Tinkerer Reforge interface is also open.~~
-    [This is now possible in tModLoader](https://github.com/tModLoader/tModLoader/commit/667306353cde6cbc6c4ecdc3bfbce8db6ef22618)
+-   Reforge interface should probably show that a current prefix could be applied to an item of this type, even if the current item already has that prefix.
 
 ## Thanks to:
 

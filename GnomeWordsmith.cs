@@ -3,26 +3,31 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
-using Terraria.ID;
 
-namespace GnomeWordsmith {
-	class GnomeWordsmith : Mod {
+namespace GnomeWordsmith
+{
+	class GnomeWordsmith : Mod
+	{
 		internal static GnomeWordsmith instance;
 		internal static bool unityMouseOver = false;
 		public UserInterface customResources;
 		public ReforgeUI reforgeUI;
 
-		public GnomeWordsmith() {
+		public GnomeWordsmith()
+		{
 		}
 
-		public override void Load() {
+		public override void Load()
+		{
 			instance = this;
 			ReforgeUI.visible = false;
 
-			if (!Main.dedServ) {
+			if (!Main.dedServ)
+			{
 				// Create Gnome Reforge Interface
 				reforgeUI = new ReforgeUI();
 				ReforgeUI.visible = true;
@@ -32,15 +37,28 @@ namespace GnomeWordsmith {
 			}
 		}
 
+		public override void Unload()
+		{
+			base.Unload();
+
+			instance = null;
+			reforgeUI = null;
+			customResources = null;
+		}
+
 		// Insert our interface layer
-		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
+		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+		{
 			int inventoryIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
 
-			if (inventoryIndex != -1) {
+			if (inventoryIndex != -1)
+			{
 				layers.Insert(inventoryIndex, new LegacyGameInterfaceLayer(
 					"GnomeWordsmith: Reforge UI",
-					delegate {
-						if (ReforgeUI.visible) {
+					delegate
+					{
+						if (ReforgeUI.visible)
+						{
 							customResources.Update(Main._drawInterfaceGameTime);
 							reforgeUI.Draw(Main.spriteBatch);
 						}
@@ -51,8 +69,10 @@ namespace GnomeWordsmith {
 			}
 		}
 
-		public override void PostDrawFullscreenMap(ref string mouseText) {
-			if (!Main.player[Main.myPlayer].HasItem(instance.ItemType("PortableWormhole"))) {
+		public override void PostDrawFullscreenMap(ref string mouseText)
+		{
+			if (!Main.player[Main.myPlayer].HasItem(instance.ItemType("PortableWormhole")))
+			{
 				unityMouseOver = false;
 				return;
 			}
@@ -64,8 +84,10 @@ namespace GnomeWordsmith {
 			float offsetX = Main.screenWidth / 2 - Main.mapFullscreenPos.X * Main.mapFullscreenScale;
 			float offsetY = Main.screenHeight / 2 - Main.mapFullscreenPos.Y * Main.mapFullscreenScale;
 
-			if (Main.netMode == 1 && Main.player[Main.myPlayer].team > 0 && !Main.player[Main.myPlayer].hostile) {
-				for (int i = 0; i < Main.player.Length; i++) {
+			if (Main.netMode == 1 && Main.player[Main.myPlayer].team > 0 && !Main.player[Main.myPlayer].hostile)
+			{
+				for (int i = 0; i < Main.player.Length; i++)
+				{
 					/**
 					 * Ignore players that are:
 					 * - Yourself.
@@ -74,7 +96,8 @@ namespace GnomeWordsmith {
 					 * - On another team.
 					 * - Hostile.
 					 */
-					if (i == Main.myPlayer || !Main.player[i].active || Main.player[i].dead || Main.player[Main.myPlayer].team != Main.player[i].team || Main.player[i].hostile) {
+					if (i == Main.myPlayer || !Main.player[i].active || Main.player[i].dead || Main.player[Main.myPlayer].team != Main.player[i].team || Main.player[i].hostile)
+					{
 						continue;
 					}
 
@@ -88,22 +111,27 @@ namespace GnomeWordsmith {
 					float maxX = minX + 28f * Main.UIScale;
 					float maxY = minY + 28f * Main.UIScale;
 
-					if (Main.mouseX >= minX && Main.mouseX <= maxX && Main.mouseY >= minY && Main.mouseY <= maxY) {
+					if (Main.mouseX >= minX && Main.mouseX <= maxX && Main.mouseY >= minY && Main.mouseY <= maxY)
+					{
 						// For some reason Main.DrawPlayerHead is protected :(
 						// Main.DrawPlayerHead(Main.player[i], playerHeadCenterX, playerHeadCenterY, 2f, Main.UIScale + 0.5f);
 
-						if (!unityMouseOver) {
+						if (!unityMouseOver)
+						{
 							Main.PlaySound(SoundID.MenuTick);
 						}
 
 						foundTarget = true;
 						unityMouseOver = true;
 
-						if (Main.mouseLeft && Main.mouseLeftRelease) {
+						if (Main.mouseLeft && Main.mouseLeftRelease)
+						{
 							Main.mouseLeftRelease = false;
 							Main.mapFullscreen = false;
 							Main.player[Main.myPlayer].UnityTeleport(Main.player[i].position);
-						} else if (text == "") {
+						}
+						else if (text == "")
+						{
 							text = Language.GetTextValue("Game.TeleportTo", Main.player[i].name);
 						}
 
@@ -112,15 +140,19 @@ namespace GnomeWordsmith {
 				}
 			}
 
-			if (!foundTarget) {
-				for (int i = 0; i < Main.npc.Length; i++) {
+			if (!foundTarget)
+			{
+				for (int i = 0; i < Main.npc.Length; i++)
+				{
 					// Only check active NPCs that are set to townNPC.
-					if (!Main.npc[i].active || !Main.npc[i].townNPC) {
+					if (!Main.npc[i].active || !Main.npc[i].townNPC)
+					{
 						continue;
 					}
 
 					int headIndex = NPC.TypeToHeadIndex(Main.npc[i].type);
-					if (headIndex <= 0) {
+					if (headIndex <= 0)
+					{
 						continue;
 					}
 
@@ -134,28 +166,34 @@ namespace GnomeWordsmith {
 					float maxX = minX + headTexture.Width * Main.UIScale;
 					float maxY = minY + headTexture.Height * Main.UIScale;
 
-					if (Main.mouseX >= minX && Main.mouseX <= maxX && Main.mouseY >= minY && Main.mouseY <= maxY) {
+					if (Main.mouseX >= minX && Main.mouseX <= maxX && Main.mouseY >= minY && Main.mouseY <= maxY)
+					{
 						SpriteEffects effect = SpriteEffects.None;
-						if (Main.npc[i].direction > 0) {
+						if (Main.npc[i].direction > 0)
+						{
 							effect = SpriteEffects.FlipHorizontally;
 						}
 
 						Main.spriteBatch.Draw(headTexture, new Vector2(npcHeadCenterX, npcHeadCenterY), new Rectangle(0, 0, headTexture.Width, headTexture.Height), Color.White, 0f, new Vector2(headTexture.Width / 2, headTexture.Height / 2), Main.UIScale + 0.5f, effect, 0f);
 
-						if (!unityMouseOver) {
+						if (!unityMouseOver)
+						{
 							Main.PlaySound(SoundID.MenuTick);
 						}
 
 						foundTarget = true;
 						unityMouseOver = true;
 
-						if (Main.mouseLeft && Main.mouseLeftRelease) {
+						if (Main.mouseLeft && Main.mouseLeftRelease)
+						{
 							Main.mouseLeftRelease = false;
 							Main.mapFullscreen = false;
 
 							Main.NewText(Language.GetTextValue("Game.HasTeleportedTo", Main.player[Main.myPlayer].name, Main.npc[i].FullName), 255, 255, 0);
 							Main.player[Main.myPlayer].Teleport(Main.npc[i].position);
-						} else if (text == "") {
+						}
+						else if (text == "")
+						{
 							text = Language.GetTextValue("Game.TeleportTo", Main.npc[i].FullName);
 						}
 
@@ -164,11 +202,13 @@ namespace GnomeWordsmith {
 				}
 			}
 
-			if (!foundTarget && unityMouseOver) {
+			if (!foundTarget && unityMouseOver)
+			{
 				unityMouseOver = false;
 			}
 
-			if (text != "") {
+			if (text != "")
+			{
 				mouseText = text;
 			}
 		}
