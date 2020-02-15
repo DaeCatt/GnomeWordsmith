@@ -1,15 +1,12 @@
 using Terraria;
 using Terraria.ModLoader;
 
-namespace GnomeWordsmith.Items
-{
-	public class PortableWormhole : ModItem
-	{
+namespace GnomeWordsmith.Items {
+	public class PortableWormhole : ModItem {
 		public override void SetStaticDefaults() { }
 
 		// Teleport effect is handled in GnomeWordsmith.cs
-		public override void SetDefaults()
-		{
+		public override void SetDefaults() {
 			item.CloneDefaults(2997);
 			item.maxStack = 1;
 			item.consumable = false;

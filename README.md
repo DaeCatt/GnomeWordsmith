@@ -1,7 +1,7 @@
 # Gnome Wordsmith 0.99.x
 
 Adds the Gnome Wordsmith NPC which allows you to Reforge items by selecting the prefix you want.
-The Gnome Wordsmith also sells a Portable Wormhole, which functions like a re-usable Wormhole, but which can also be used to teleport to Town NPCs.
+The Gnome Wordsmith also sells a Portable Wormhole, which functions like a re-usable Wormhole potion, but which can also be used to teleport to Town NPCs.
 
 The Gnome Wordsmith can only spawn once both the Goblin Tinkerer and the Steampunker have joined your town.
 
